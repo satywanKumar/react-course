@@ -7,9 +7,17 @@ import Student3 from './Student3'
 import Demo from './Demo'
 import Product from './Product'
 import Shop from './Shop'
+import Demo2 from './Demo2'
+import Event from './Event'
+import Child from './Child'
+import State from './State'
 const App = ()=>{
     // const productName = "hp";
     // const productPrice = 4778;
+
+    // const DataReciever = (d)=>{
+    //     console.log('from app component',d)
+    // }
 
     return (
         <div>
@@ -38,10 +46,18 @@ const App = ()=>{
             <button>Call now</button>
             </Shop> */}
 
-            <Shop data={{shopName:'satya ka dukan',contact:99888778}}>
+            {/* <Shop data={{shopName:'satya ka dukan',contact:99888778}}>
             <button>contact now</button>
             <button>call now</button>
-            </Shop>
+            </Shop> */}
+
+            {/* <Demo2 name="satywan" email="sk@gmail.com"/> */}
+            {/* <Event/> */}
+
+            {/* <Child receiver = {DataReciever}/> */}
+
+            <State/>
+            
 
         </div>
     )
