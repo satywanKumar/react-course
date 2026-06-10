@@ -1,15 +1,18 @@
-const State = () => {
-  var fullName = "satya"
+import { useState } from "react"
 
-  const changeName = ()=>{
-    fullName = "aman"
+const State = ()=>{
+  // var fullName = "sri b.s classes"
+  const [fullName,setFullName] = useState('sri bs classes')
+
+  const changeHandler = ()=>{
+    setFullName("sbs online classes")
   }
-
   return (
     <div>
-        <h1>{fullName}</h1>
-        <button onClick={changeName}>Change fullName</button>
-        <button onClick={()=>{console.log(fullName)}}>Show Current fullName</button>
+      {console.log('UI load ho gya')}
+      <h1>{fullName}</h1>
+      <button onClick={changeHandler}>change name</button>
+      <button onClick={()=>{console.log(fullName)}}>show name</button>
     </div>
   )
 }

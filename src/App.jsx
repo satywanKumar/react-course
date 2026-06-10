@@ -11,6 +11,8 @@ import Demo2 from './Demo2'
 import Event from './Event'
 import Child from './Child'
 import State from './State'
+import Value from './Value'
+import Subscribe from './Subscribe'
 const App = ()=>{
     // const productName = "hp";
     // const productPrice = 4778;
@@ -56,7 +58,9 @@ const App = ()=>{
 
             {/* <Child receiver = {DataReciever}/> */}
 
-            <State/>
+            {/* <State/> */}
+            {/* <Value/> */}
+            <Subscribe/>
             
 
         </div>
