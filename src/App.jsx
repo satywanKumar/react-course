@@ -13,6 +13,12 @@ import Child from './Child'
 import State from './State'
 import Value from './Value'
 import Subscribe from './Subscribe'
+import Condition from './Condition'
+import Array  from './Array'
+import StudentList from './StudentList'
+import Bulb from './Bulb'
+import ProductList from './ProductList'
+import ContactList from './ContactList'
 const App = ()=>{
     // const productName = "hp";
     // const productPrice = 4778;
@@ -60,7 +66,13 @@ const App = ()=>{
 
             {/* <State/> */}
             {/* <Value/> */}
-            <Subscribe/>
+            {/* <Subscribe/> */}
+            {/* <Condition/> */}
+            {/* <Array/> */}
+            {/* <StudentList/> */}
+            {/* <Bulb/> */}
+            {/* <ProductList/> */}
+            <ContactList/>
             
 
         </div>
