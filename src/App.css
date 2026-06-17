@@ -23,7 +23,7 @@
     background-color: royalblue;
 } */
 
-.success
+/* .success
 {
     color: green;
     font-family: cursive;
@@ -50,4 +50,20 @@
 .productCard
 {
     border: 1px solid red;
+} */
+
+table
+{
+    width: 90%;
+    margin: auto;
+    background-color: #eee;
+    box-shadow: 5px 5px 10px royalblue;
+    border-collapse: collapse;
+}
+
+th,td
+{
+    padding: 5px;
+    border: 1px solid #333;
+    text-align: left;
 }
