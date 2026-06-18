@@ -19,6 +19,7 @@ import StudentList from './StudentList'
 import Bulb from './Bulb'
 import ProductList from './ProductList'
 import ContactList from './ContactList'
+import Input from './Input'
 const App = ()=>{
     // const productName = "hp";
     // const productPrice = 4778;
@@ -73,6 +74,7 @@ const App = ()=>{
             {/* <Bulb/> */}
             {/* <ProductList/> */}
             <ContactList/>
+            {/* <Input/> */}
             
 
         </div>

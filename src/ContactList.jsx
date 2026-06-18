@@ -4,6 +4,11 @@ import loader from './assets/loader.gif'
 
 const ContactList = () => {
   console.log("pura function dubara chala")
+  const [fullName,setFullName] = useState('')
+  const [email,setEmail] = useState('')
+  const [phone,setPhone] = useState('')
+  const [gender,setGender] = useState('')
+  const [address,setAddress] = useState('')
   //   const [value,setvalue] = useState(0)
 
   //   const inc = ()=>{
@@ -52,8 +57,44 @@ const ContactList = () => {
     }
   }
 
+  const submitHandler = ()=>{
+    const newContact = {
+      name:fullName,
+      email:email,
+      phone:phone,
+      gender:gender,
+      address:address
+    }
+    console.log(newContact)
+    axios.post('https://sbs-contact.onrender.com/api/contacts',{
+      name:'satya raj',
+      email:'satya@gmail.com',
+      phone:'7989988878',
+      gender:'Male',
+      address:'ranchi'
+    })
+    .then(res=>{
+      console.log(res)
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  }
+
   return (
     <>
+      <h1>Add Contact</h1>
+      <form>
+        <input value={fullName} onChange={(e)=>{setFullName(e.target.value)}} placeholder="full name" />
+        <input value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder="Email" />
+        <input value={phone} onChange={(e)=>{setPhone(e.target.value)}} placeholder="phone"/>
+          <select onChange={(e)=>{setGender(e.target.value)}}>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        <input onChange={(e)=>{setAddress(e.target.value)}} type="text" placeholder="address" />
+        <button type="button" onClick={submitHandler}>Add Contact</button>
+      </form>
       {isLoading ?
         <img src={loader} alt="loader" />
         :
