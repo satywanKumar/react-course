@@ -7,7 +7,7 @@ const ContactList = () => {
   const [fullName,setFullName] = useState('')
   const [email,setEmail] = useState('')
   const [phone,setPhone] = useState('')
-  const [gender,setGender] = useState('')
+  const [gender,setGender] = useState('Female')
   const [address,setAddress] = useState('')
   //   const [value,setvalue] = useState(0)
 
@@ -22,12 +22,15 @@ const ContactList = () => {
   //   }
   const [contactList, setContactList] = useState([])
   const [isLoading, setLoading] = useState(true)
+  const [editingState,setEditingState] = useState(false)
+  const [contactId,setId] = useState('')
 
   useEffect(() => {
     getContact()
   }, [])
 
   const getContact = () => {
+    setLoading(true)
     axios.get('https://sbs-contact.onrender.com/api/contacts')
       .then(res => {
         setLoading(false)
@@ -66,20 +69,53 @@ const ContactList = () => {
       address:address
     }
     console.log(newContact)
-    axios.post('https://sbs-contact.onrender.com/api/contacts',{
-      name:'satya raj',
-      email:'satya@gmail.com',
-      phone:'7989988878',
-      gender:'Male',
-      address:'ranchi'
-    })
-    .then(res=>{
-      console.log(res)
-    })
-    .catch(err=>{
-      console.log(err)
-    })
+    if(editingState)
+    {
+      axios.put('https://sbs-contact.onrender.com/api/contacts/'+contactId,newContact)
+      .then(res=>{
+        setEditingState(false)
+        console.log(res)
+        resetForm()
+        getContact()
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    }
+    else
+    {
+      axios.post('https://sbs-contact.onrender.com/api/contacts',newContact)
+      .then(res=>{
+        console.log(res)
+        resetForm()
+        getContact()
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    }
   }
+
+  const resetForm = ()=>{
+    setFullName("")
+    setEmail("")
+    setGender("Male")
+    setAddress("")
+    setPhone("")
+  }
+
+  const editHandler = (data)=>{
+    setEditingState(true)
+    console.log(data)
+    setFullName(data.name)
+    setEmail(data.email)
+    setPhone(data.phone)
+    setAddress(data.address)
+    setGender(data.gender)
+    setId(data._id)
+  }
+
+
 
   return (
     <>
@@ -88,12 +124,16 @@ const ContactList = () => {
         <input value={fullName} onChange={(e)=>{setFullName(e.target.value)}} placeholder="full name" />
         <input value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder="Email" />
         <input value={phone} onChange={(e)=>{setPhone(e.target.value)}} placeholder="phone"/>
-          <select onChange={(e)=>{setGender(e.target.value)}}>
+          <select value={gender} onChange={(e)=>{setGender(e.target.value)}}>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
         </select>
-        <input onChange={(e)=>{setAddress(e.target.value)}} type="text" placeholder="address" />
-        <button type="button" onClick={submitHandler}>Add Contact</button>
+        <input value={address} onChange={(e)=>{setAddress(e.target.value)}} type="text" placeholder="address" />
+        <button type="button" onClick={submitHandler}>{editingState ? 'edit contact': 'add contact'}</button>
+        {editingState && <button type="button" onClick={()=>{
+          resetForm()
+          setEditingState(false)
+        }}>cancel</button>}
       </form>
       {isLoading ?
         <img src={loader} alt="loader" />
@@ -122,7 +162,9 @@ const ContactList = () => {
                 <th>Phone</th>
                 <th>Gender</th>
                 <th>Address</th>
-                <th>Action</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                
               </tr>
             </thead>
             <tbody>
@@ -134,6 +176,9 @@ const ContactList = () => {
                     <td>{data.phone}</td>
                     <td>{data.gender}</td>
                     <td>{data.address}</td>
+                    <td>
+                      <button onClick={()=>{editHandler(data)}} type="button">Edit</button>
+                    </td>
                     <td>
                       <button onClick={() => { deleteContactById(data._id) }} style={{ backgroundColor: 'red', color: 'white' }}>Delete</button>
                     </td>
